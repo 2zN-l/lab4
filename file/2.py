@@ -16,4 +16,4 @@ def validate(*conditions):
 def my_function(x, y):
     pass
 
-print(my_function(5, '5'))
+
