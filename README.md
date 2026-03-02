@@ -10,15 +10,15 @@
 ##### Результат:
 
 ``` python
-acc = colection(stop_value='stop')
+a = colection(stop_value='stop')
 
-print(acc(1))        # None
-print(acc(2))        # None
-print(acc(3))        # None
-print(acc('stop'))   # [1, 2, 3]
-print(acc(4))        # None
-print(acc(5))        # None
-print(acc('stop'))   # [4, 5]
+print(a(1)) 
+print(a(2)) 
+print(a(3)) 
+print(a('stop')) 
+print(a(4))
+print(a(5))     
+print(a('stop'))
 ```
 
 
@@ -36,14 +36,38 @@ print(acc('stop'))   # [4, 5]
 def my_function(x, y):
     pass
 ```
+<br>
 
+1. Написана функция, которая проверяет аргументы других функций
+2. Добавлена возможность задавать правила проверки (например: "число должно быть больше 0")
+3. Сделано так, что перед запуском функции проверяются все её аргументы
+4. Если аргумент не подходит под правило - программа выдаёт ошибку
+5. Если всё хорошо - функция работает как обычно
 
 ##### Результат:
 
 ``` python
-print(my_function(5, "hello"))
-print(my_function(-1, "hello")) 
-print(my_function(5, 123))
+my_function(52, "hello")
+try:
+    my_function(-5, "hello")
+except ValueError as e:
+    print(e)
+
+try:
+    my_function(10, 123)
+except ValueError as e:
+    print(e)
+
+try:
+    my_function(5)
+except ValueError as e:
+    print(e)
 ```
 
-ФОТО НАДА
+<img width="655" height="68" alt="image" src="https://github.com/user-attachments/assets/ca95015a-df0e-4a3e-b349-74cd3ef1c45f" />
+
+
+<br>
+<br>
+<br>
+
