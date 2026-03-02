@@ -1,34 +1,24 @@
-from functools import wraps
+def coll(stop_value, *conditions):
+    collected = []
 
-def validate(*conditions):
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            if len(args) < len(conditions):
-                raise ValueError("Мало аргументов")
-            for i, (arg, condition) in enumerate(zip(args, conditions)):
-                if not condition(arg):
-                    raise ValueError(f"Аргумент '{arg}' не удовлетворяет условию")
-            return func(*args, **kwargs)
-        return wrapper
-    return decorator
-
-
-def collection(stop_value=None):
-    collected_args = []
-    
-
-    @validate(lambda x: (isinstance(x, int) and x > 0) or x == stop_value)
-    def inner(arg):
-        nonlocal collected_args
-    
+    def collector(arg):
+        nonlocal collected
         if arg == stop_value:
-            result = collected_args.copy()
-            collected_args.clear()
+            result = collected.copy()
+            collected.clear()
             return result
         else:
-            collected_args.append(arg)
-            return f"ДОБАВЛЕНО: {arg}"
-    
-    return inner
+            for condition in conditions:
+                if not condition(arg):
+                    raise ValueError(f"Аргумент {arg} не удовлетворяет условию ")
+            collected.append(arg)
+            return None
 
+    return collector
+
+
+c = coll('stop', lambda x: isinstance(x, int) and x > 0)
+
+c(1)
+c(2)
+print(c('stop'))
