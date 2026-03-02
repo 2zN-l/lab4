@@ -4,9 +4,11 @@ def validate(*conditions):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
+            if len(args) < len(conditions):
+                raise ValueError("Мало аргументов")
             for i, (arg, condition) in enumerate(zip(args, conditions)):
-               if not condition(arg):
-                    raise ValueError(f"Значение: {arg} не соответствует условию")
+                if not condition(arg):
+                    raise ValueError(f"Аргумент '{arg}' не удовлетворяет условию")
             return func(*args, **kwargs)
         return wrapper
     return decorator
@@ -14,6 +16,4 @@ def validate(*conditions):
 
 @validate(lambda x: x > 0, lambda y: isinstance(y, str))
 def my_function(x, y):
-    pass
-
-
+     pass
