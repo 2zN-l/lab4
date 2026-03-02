@@ -71,3 +71,30 @@ except ValueError as e:
 <br>
 <br>
 
+
+# Задание 3
+Примените декоратор к замыканию.
+
+1. Замыкание — coll принимает stop_value и условия, возвращает collector с доступом к collected.
+2. Накопление — аргументы добавляются в collected, пока не встретится stop_value.
+3. Валидация — каждый аргумент проверяется условиями, иначе исключение.
+4. Возврат и очистка — при stop_value возвращается копия collected, затем список очищается.
+5. Пример — c = coll('stop', lambda x: x > 0) — добавляем 1, 2, получаем [1, 2] по 'stop'.
+
+
+
+``` python
+c = coll('stop', lambda x: isinstance(x, int) and x > 0)
+
+c(1)
+c(2)
+print(c('stop'))
+
+```
+<img width="184" height="46" alt="image" src="https://github.com/user-attachments/assets/71392b8a-22a0-42c3-9c9a-3965593909d9" />
+
+# Список использованной литературы
+1. [Декораторы Python: пошаговое руководство](https://habr.com/ru/companies/otus/articles/727590/)
+2. [Коллекции Python](https://university.ylab.io/articles/tpost/tinb2nne31-kollektsii-python)
+3. [Валидируйте это немедленно](https://habr.com/ru/articles/800837/)
+
