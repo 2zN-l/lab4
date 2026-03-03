@@ -14,3 +14,12 @@ def colection(stop_value=None):
     
     return inner
 
+a = colection(stop_value='stop')
+
+print(a(1)) 
+print(a(2)) 
+print(a(3)) 
+print(a('stop')) 
+print(a(4))
+print(a(5))     
+print(a('stop'))
