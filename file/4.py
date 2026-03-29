@@ -1,19 +1,16 @@
-
-def validate(*conditions):
+def validate(condition=None):
     def decorator(func):
-        def wrapper(*args):
-            check_conditions = conditions
-            if not check_conditions:
-                check_conditions = (lambda x: x > 0,)
-            if len(args) < len(check_conditions):
-                raise ValueError("Мало аргументов")
-            for i, (arg, cond) in enumerate(zip(args, check_conditions)):
-                if not cond(arg):
-                    raise ValueError(f"Аргумент '{arg}' не удовлетворяет условию")
-            return func(*args)
+        def wrapper(x):
+            if condition is None:
+                cond = lambda x: x > 0
+            else:
+                cond = condition
+            
+            if not cond(x):
+                raise ValueError(f"{x} не подходит условию")
+            return func(x)
         return wrapper
     return decorator
-
 
 #====================== С УСЛОВИЕМ =============================
 
@@ -70,7 +67,7 @@ def collection(stop_value='stop'):
         
         return validated_inner(x)
     
-    @validate()
+    @validate
     def validated_inner(x):
         nonlocal collected_args
         collected_args.append(x)
